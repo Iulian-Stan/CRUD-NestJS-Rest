@@ -1,16 +1,16 @@
 {
   "compilerOptions": {
+    "outDir": "./dist",
     "module": "commonjs",
+    "target": "es2017",
+    "baseUrl": "./",
     "declaration": true,
-    "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es2017",
-    "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": "./",
     "incremental": true,
-    "skipLibCheck": true
+    "removeComments": true,
+    "skipLibCheck": true,
+    "sourceMap": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]

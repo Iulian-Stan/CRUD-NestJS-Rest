@@ -25,13 +25,13 @@ export class UsersService {
   }
 
   async update(id: number, user: UserDto): Promise<void> {
-    let old_user = await this.usersRepository.findOneBy({id});
+    const old_user = await this.usersRepository.findOneBy({id});
     if (old_user) {
       old_user.first_name = user.first_name;
       old_user.last_name = user.last_name;
       await this.usersRepository.save(old_user);
     } else {
-      let new_user = new User();
+      const new_user = new User();
       new_user.id = id;
       new_user.first_name = user.first_name;
       new_user.last_name = user.last_name;
