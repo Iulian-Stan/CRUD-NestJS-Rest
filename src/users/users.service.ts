@@ -21,11 +21,11 @@ export class UsersService {
 
 
   findOne(id: number): Promise<User> {
-    return this.usersRepository.findOne(id);
+    return this.usersRepository.findOneBy({id});
   }
 
   async update(id: number, user: UserDto): Promise<void> {
-    let old_user = await this.usersRepository.findOne(id);
+    let old_user = await this.usersRepository.findOneBy({id});
     if (old_user) {
       old_user.first_name = user.first_name;
       old_user.last_name = user.last_name;
