@@ -8,7 +8,7 @@ import { UsersModule } from './users/users.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: 'database.db',
+      database: 'database.sqlite',
       autoLoadEntities: true,
       synchronize: true
     }),
