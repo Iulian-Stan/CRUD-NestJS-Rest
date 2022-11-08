@@ -8,10 +8,10 @@ export class User {
   id: number;
 
   @Column({ length: 50 })
-  @ApiProperty({ example: 'Susie', description: 'User\'s first_name' })
-  first_name: string;
+  @ApiProperty({ example: 'John', description: 'User\'s first name' })
+  firstName: string;
 
   @Column({ length: 50 })
-  @ApiProperty({ example: 'Osborne', description: 'User\'s last_name' })
-  last_name: string;
+  @ApiProperty({ example: 'Doe', description: 'User\'s last name' })
+  lastName: string;
 }

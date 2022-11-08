@@ -1,9 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class UserDto {
-  @ApiProperty({ example: 'Susie', description: 'User\'s first_name' })
-  first_name: string;
+  @ApiProperty({ example: 'John', description: 'User\'s first name' })
+  firstName: string;
 
-  @ApiProperty({ example: 'Osborne', description: 'User\'s last_name' })
-  last_name: string;
+  @ApiProperty({ example: 'Doe', description: 'User\'s last name' })
+  lastName: string;
 }
