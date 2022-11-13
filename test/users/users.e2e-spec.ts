@@ -6,7 +6,7 @@ import { UsersModule } from '../../src/users/users.module';
 import { UserDto } from '../../src/users/model';
 
 describe('Users - /users (e2e)', () => {
-  const users = {
+  const user = {
     id: 1,
     firstName: 'FirstName #1',
     lastName: 'LastName #1'
@@ -34,10 +34,10 @@ describe('Users - /users (e2e)', () => {
   it('Create [POST /users]', () => {
     return request(app.getHttpServer())
       .post('/users')
-      .send(users as UserDto)
+      .send(user as UserDto)
       .expect(201)
       .then(({ body }) => {
-        expect(body).toEqual(users);
+        expect(body).toEqual(user);
       });
   });
 

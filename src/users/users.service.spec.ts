@@ -34,8 +34,7 @@ describe('UserService', () => {
             find: jest.fn().mockResolvedValue(usersArray),
             findOneBy: jest.fn().mockResolvedValue(oneUser),
             save: jest.fn().mockResolvedValue(oneUser),
-            remove: jest.fn(),
-            delete: jest.fn(),
+            delete: jest.fn()
           },
         },
       ],
