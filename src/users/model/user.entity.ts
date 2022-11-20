@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Book } from '../../books/model';
 
 @Entity()
 export class User {
@@ -14,4 +15,8 @@ export class User {
   @Column({ length: 50 })
   @ApiProperty({ example: 'Doe', description: 'User\'s last name' })
   lastName: string;
+
+  // Associations
+  @OneToMany(type => Book, book => book.owner, { cascade: true })
+  books: Book[];
 }

@@ -7,17 +7,17 @@ import { UsersService } from './users.service';
 const usersArray = [
   {
     firstName: 'firstName #1',
-    lastName: 'lastName #1',
+    lastName: 'lastName #1'
   },
   {
     firstName: 'firstName #2',
-    lastName: 'lastName #2',
-  },
+    lastName: 'lastName #2'
+  }
 ];
 
 const oneUser = {
   firstName: 'firstName #1',
-  lastName: 'lastName #1',
+  lastName: 'lastName #1'
 };
 
 describe('UserService', () => {
@@ -35,9 +35,9 @@ describe('UserService', () => {
             findOneBy: jest.fn().mockResolvedValue(oneUser),
             save: jest.fn().mockResolvedValue(oneUser),
             delete: jest.fn()
-          },
-        },
-      ],
+          }
+        }
+      ]
     }).compile();
 
     service = module.get<UsersService>(UsersService);
@@ -52,13 +52,13 @@ describe('UserService', () => {
     it('should successfully insert a user', () => {
       const oneUser = {
         firstName: 'firstName #1',
-        lastName: 'lastName #1',
+        lastName: 'lastName #1'
       };
       expect(
         service.create({
           firstName: 'firstName #1',
-          lastName: 'lastName #1',
-        }),
+          lastName: 'lastName #1'
+        })
       ).resolves.toEqual(oneUser);
     });
   });

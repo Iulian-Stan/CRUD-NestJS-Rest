@@ -9,7 +9,8 @@ describe('Users - /users (e2e)', () => {
   const user = {
     id: 1,
     firstName: 'FirstName #1',
-    lastName: 'LastName #1'
+    lastName: 'LastName #1',
+    books: []
   };
 
   let app: INestApplication;

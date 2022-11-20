@@ -5,7 +5,7 @@ import { UsersService } from './users.service';
 
 const userDto: UserDto = {
   firstName: 'firstName #1',
-  lastName: 'lastName #1',
+  lastName: 'lastName #1'
 };
 
 describe('UsersController', () => {
@@ -27,24 +27,24 @@ describe('UsersController', () => {
             findAll: jest.fn().mockResolvedValue([
               {
                 firstName: 'firstName #1',
-                lastName: 'lastName #1',
+                lastName: 'lastName #1'
               },
               {
                 firstName: 'firstName #2',
-                lastName: 'lastName #2',
-              },
+                lastName: 'lastName #2'
+              }
             ]),
             findOne: jest.fn().mockImplementation((id: number) =>
               Promise.resolve({
                 firstName: 'firstName #1',
                 lastName: 'lastName #1',
-                id,
-              }),
+                id
+              })
             ),
             remove: jest.fn(),
-          },
-        },
-      ],
+          }
+        }
+      ]
     }).compile();
 
     usersController = app.get<UsersController>(UsersController);
@@ -59,7 +59,7 @@ describe('UsersController', () => {
     it('should create a user', () => {
       expect(usersController.create(userDto)).resolves.toEqual({
         id: 1,
-        ...userDto,
+        ...userDto
       });
       expect(usersService.create).toHaveBeenCalled();
       expect(usersService.create).toHaveBeenCalledWith(userDto);
@@ -80,7 +80,7 @@ describe('UsersController', () => {
       expect(usersController.findOne(1)).resolves.toEqual({
         firstName: 'firstName #1',
         lastName: 'lastName #1',
-        id: 1,
+        id: 1
       });
     });
   });
