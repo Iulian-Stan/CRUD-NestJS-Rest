@@ -9,12 +9,16 @@ export class User {
   id: number;
 
   @Column({ length: 50 })
-  @ApiProperty({ example: 'John', description: 'User\'s first name' })
-  firstName: string;
+  @ApiProperty({ example: 'John Doe', description: 'User\'s name' })
+  name: string;
 
   @Column({ length: 50 })
-  @ApiProperty({ example: 'Doe', description: 'User\'s last name' })
-  lastName: string;
+  @ApiProperty({ example: 'john.doe@mail.com', description: 'User\'s email' })
+  email: string;
+
+  @Column({ length: 50 })
+  @ApiProperty({ description: 'User\'s hashed password' })
+  password: string;
 
   // Associations
   @OneToMany(type => Book, book => book.owner, { cascade: true })

@@ -3,16 +3,17 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User, UserDto } from './model';
 import { Book } from '../books/model';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
   constructor(@InjectRepository(User) private readonly usersRepository: Repository<User>) {}
 
-  create(userDto: UserDto): Promise<User> {
-    const { firstName, lastName } = userDto;
+  async create(userDto: UserDto): Promise<User> {
     const user = new User();
-    user.firstName = firstName;
-    user.lastName = lastName;
+    user.name = userDto.name;
+    user.email = userDto.email;
+    user.password = await bcrypt.hash(userDto.password, 10);
     user.books = [];
     return this.usersRepository.save(user);
   }
@@ -29,14 +30,15 @@ export class UsersService {
     await this.usersRepository.delete(id);
   }
 
-  async update(id: number, user: UserDto): Promise<User> {
-    const oldUser = await this.usersRepository.findOneBy({id});
-    if (oldUser) {
-      oldUser.firstName = user.firstName;
-      oldUser.lastName = user.lastName;
-      return this.usersRepository.save(oldUser);
+  async update(id: number, userDto: UserDto): Promise<User> {
+    const user = await this.usersRepository.findOneBy({id});
+    if (user) {
+      user.name = userDto.name;
+      user.email = userDto.email;
+      user.password = await bcrypt.hash(userDto.password, 10);
+      return this.usersRepository.save(user);
     } 
-    return oldUser;
+    return user;
   }
 
   async getBooks(id: number): Promise<Book[]> {

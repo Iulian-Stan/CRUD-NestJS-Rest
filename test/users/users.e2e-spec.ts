@@ -6,11 +6,10 @@ import { UsersModule } from '../../src/users/users.module';
 import { UserDto } from '../../src/users/model';
 
 describe('Users - /users (e2e)', () => {
-  const user = {
-    id: 1,
-    firstName: 'FirstName #1',
-    lastName: 'LastName #1',
-    books: []
+  const userDto: UserDto = {
+    name: 'name #1',
+    email: 'email #1',
+    password: 'pass #1'
   };
 
   let app: INestApplication;
@@ -35,10 +34,13 @@ describe('Users - /users (e2e)', () => {
   it('Create [POST /users]', () => {
     return request(app.getHttpServer())
       .post('/users')
-      .send(user as UserDto)
+      .send(userDto)
       .expect(201)
       .then(({ body }) => {
-        expect(body).toEqual(user);
+        expect(body).toMatchObject({
+          name: userDto.name,
+          email: userDto.email
+        });
       });
   });
 

@@ -13,6 +13,10 @@ export class Book {
   title: string;
 
   @Column({ length: 50 })
+  @ApiProperty({ example: 'Charles Perrault', description: 'Book author' })
+  author: string;
+
+  @Column({ length: 50 })
   @ApiProperty({ example: 'Fairy Tale for kids', description: 'Book description' })
   description: string;
 

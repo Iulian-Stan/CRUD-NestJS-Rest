@@ -13,11 +13,11 @@ export class BooksService {
     private usersService: UsersService) {}
 
   async create(bookDto: BookDto): Promise<Book> {
-    const { title, description , userID } = bookDto;
     const book = new Book();
-    book.title = title;
-    book.description = description;
-    book.owner = await this.usersService.findOne(userID);
+    book.title = bookDto.title;
+    book.author = bookDto.author;
+    book.description = bookDto.description;
+    book.owner = await this.usersService.findOne(bookDto.ownerId);
     return this.booksRepository.save(book);
   }
 
@@ -33,15 +33,16 @@ export class BooksService {
     await this.booksRepository.delete(id);
   }
 
-  async update(id: number, book: BookDto): Promise<Book> {
-    const oldBook = await this.booksRepository.findOneBy({ id });
-    if (oldBook) {
-      oldBook.title = book.title;
-      oldBook.description = book.description;
-      oldBook.owner = await this.usersService.findOne(book.userID);
-      return this.booksRepository.save(oldBook);
+  async update(id: number, bookDto: BookDto): Promise<Book> {
+    const book = await this.booksRepository.findOneBy({ id });
+    if (book) {
+      book.title = bookDto.title;
+      book.author = bookDto.author;
+      book.description = bookDto.description;
+      book.owner = await this.usersService.findOne(bookDto.ownerId);
+      return this.booksRepository.save(book);
     }
-    return oldBook;
+    return book;
   }
 
   async getOwner(id: number): Promise<User> {
