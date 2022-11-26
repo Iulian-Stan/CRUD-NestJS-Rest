@@ -34,9 +34,9 @@ describe('UserService', () => {
         {
           provide: getRepositoryToken(User),
           useValue: {
+            save: jest.fn().mockResolvedValue(oneUser),
             find: jest.fn().mockResolvedValue(usersArray),
             findOneBy: jest.fn().mockResolvedValue(oneUser),
-            save: jest.fn().mockResolvedValue(oneUser),
             delete: jest.fn()
           }
         }
@@ -52,8 +52,9 @@ describe('UserService', () => {
   });
 
   describe('create()', () => {
-    it('should successfully insert a user', () => {
-      expect(usersService.create(oneUser)).resolves.toEqual(oneUser);
+    it('should successfully insert a user', async () => {
+      const retVal = await usersService.create(oneUser);
+      expect(retVal).toEqual(oneUser);
     });
   });
 
@@ -78,6 +79,15 @@ describe('UserService', () => {
       const retVal = await usersService.remove(2);
       expect(removeSpy).toBeCalledWith(2);
       expect(retVal).toBeUndefined();
+    });
+  });
+
+  describe('update()', () => {
+    it('should update a user', async () => {
+      const findSpy = jest.spyOn(usersRepository, 'findOneBy');
+      const retVal = await usersService.update(1, oneUser);
+      expect(findSpy).toBeCalledWith({ id: 1 });
+      expect(retVal).toEqual(oneUser);
     });
   });
 });

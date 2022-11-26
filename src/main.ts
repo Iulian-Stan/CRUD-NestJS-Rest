@@ -4,20 +4,16 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.setGlobalPrefix('v1.0');
 
   const options = new DocumentBuilder()
-    .setTitle('Hello World')
-    .setDescription('API Description')
+    .setTitle('Book owners')
+    .setDescription('Interact with a DB of users and their books')
     .setVersion('1.0')
-    .addServer('/v1.0')
-    .addTag('Users')
+    .addBearerAuth()
     .build();
-  const document = SwaggerModule.createDocument(app, options, {
-     ignoreGlobalPrefix: true,
-  });
-  SwaggerModule.setup('/v1.0/ui', app, document);
+  const document = SwaggerModule.createDocument(app, options);
+  SwaggerModule.setup('api', app, document);
   
-  await app.listen(9090);
+  await app.listen(4000);
 }
 bootstrap();
