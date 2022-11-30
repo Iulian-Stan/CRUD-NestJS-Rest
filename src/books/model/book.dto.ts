@@ -1,15 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class BookDto {
-  @ApiProperty({ example: 'Little Red Riding Hood', description: 'Book title' })
+  @ApiProperty({ description: 'Book title', example: 'Little Red Riding Hood' })
   readonly title: string;
 
-  @ApiProperty({ example: 'Charles Perrault', description: 'Book author' })
+  @ApiProperty({ description: 'Book author', example: 'Charles Perrault' })
   readonly author: string;
 
-  @ApiProperty({ example: 'Fairy Tale for kids', description: 'Book description' })
+  @ApiProperty({ description: 'Book description', example: 'Fairy Tale for kids' })
   readonly description: string;
 
-  @ApiProperty({ description: 'Owner ID' })
-  readonly ownerId: number;
+  @ApiProperty({ description: 'Owner identifier' })
+  readonly ownerId: string;
 }

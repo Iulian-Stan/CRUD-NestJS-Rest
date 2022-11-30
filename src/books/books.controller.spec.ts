@@ -1,11 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { BookDto } from './model';
 import { BooksController } from './books.controller';
 import { BooksService } from './books.service';
 
 describe('BooksController', () => {
   let booksController: BooksController;
-  let booksService: BooksService;
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
@@ -19,7 +17,6 @@ describe('BooksController', () => {
     }).compile();
 
     booksController = app.get<BooksController>(BooksController);
-    booksService = app.get<BooksService>(BooksService);
   });
 
   it('should be defined', () => {

@@ -23,6 +23,8 @@ const oneUser: UserDto = {
   password: 'pass #1'
 };
 
+const email = 'email';
+
 describe('UserService', () => {
   let usersService: UsersService;
   let usersRepository: Repository<User>;
@@ -68,16 +70,16 @@ describe('UserService', () => {
   describe('findOne()', () => {
     it('should get a single user', () => {
       const findSpy = jest.spyOn(usersRepository, 'findOneBy');
-      expect(usersService.findOne(1)).resolves.toEqual(oneUser);
-      expect(findSpy).toBeCalledWith({ id: 1 });
+      expect(usersService.findOne(email)).resolves.toEqual(oneUser);
+      expect(findSpy).toHaveBeenCalledWith({ email });
     });
   });
 
   describe('remove()', () => {
     it('should remove a user', async () => {
       const removeSpy = jest.spyOn(usersRepository, 'delete');
-      const retVal = await usersService.remove(2);
-      expect(removeSpy).toBeCalledWith(2);
+      const retVal = await usersService.remove(email);
+      expect(removeSpy).toHaveBeenCalledWith(email);
       expect(retVal).toBeUndefined();
     });
   });
@@ -85,8 +87,8 @@ describe('UserService', () => {
   describe('update()', () => {
     it('should update a user', async () => {
       const findSpy = jest.spyOn(usersRepository, 'findOneBy');
-      const retVal = await usersService.update(1, oneUser);
-      expect(findSpy).toBeCalledWith({ id: 1 });
+      const retVal = await usersService.update(email, oneUser);
+      expect(findSpy).toHaveBeenCalledWith({ email });
       expect(retVal).toEqual(oneUser);
     });
   });

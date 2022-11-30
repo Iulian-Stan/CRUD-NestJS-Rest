@@ -53,17 +53,17 @@ describe('Users - /users (e2e)', () => {
       });
   });
 
-  it('Get one user [GET /users/:id]', () => {
+  it('Get one user [GET /users/:email]', () => {
     return request(app.getHttpServer())
-      .get('/users/2')
+      .get('/users/' + userDto.email)
       .expect(200)
       .then(({ body }) => {
         expect(body).toBeDefined();
       });
   });
 
-  it('Delete one user [DELETE /users/:id]', () => {
-    return request(app.getHttpServer()).delete('/users/1').expect(200);
+  it('Delete one user [DELETE /users//:email]', () => {
+    return request(app.getHttpServer()).delete('/users/' + userDto.email).expect(200);
   });
 
   afterAll(async () => {
