@@ -1,19 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Column, Entity, PrimaryColumn, OneToMany } from 'typeorm';
 import { Book } from '../../books/model';
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn()
-  @ApiProperty({ example: '1', description: 'Unique identifier', required: false })
-  id: number;
-
   @Column({ length: 50 })
-  @ApiProperty({ example: 'John Doe', description: 'User\'s name' })
+  @ApiProperty({ description: 'User\'s name', example: 'John Doe' })
   name: string;
 
-  @Column({ length: 50 })
-  @ApiProperty({ example: 'john.doe@mail.com', description: 'User\'s email' })
+  @PrimaryColumn({ length: 50 })
+  @ApiProperty({ description: 'User\'s email', example: 'john.doe@mail.com' })
   email: string;
 
   @Column({ length: 50 })

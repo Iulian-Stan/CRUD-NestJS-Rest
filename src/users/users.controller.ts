@@ -24,35 +24,35 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  @Get(':id')
-  @ApiOperation({ summary: 'Find user by id' })
+  @Get(':email')
+  @ApiOperation({ summary: 'Find user by email' })
   @ApiResponse({ status: 200, description: 'User found', type: User })
   @ApiResponse({ status: 404, description: 'User not found' })
-  findOne(@Param('id') id: number): Promise<User> {
-    return this.usersService.findOne(id);
+  findOne(@Param('email') email: string): Promise<User> {
+    return this.usersService.findOne(email);
   }
 
-  @Delete(':id')
+  @Delete(':email')
   @ApiOperation({ summary: 'Delete user' })
   @ApiResponse({ status: 204, description: 'User deleted' })
   @ApiResponse({ status: 404, description: 'User not found' })
-  remove(@Param('id') id: number): Promise<void> {
-    return this.usersService.remove(id);
+  remove(@Param('email') email: string): Promise<void> {
+    return this.usersService.remove(email);
   }
 
-  @Put(':id')
+  @Put(':email')
   @ApiOperation({ summary: 'Update user' })
   @ApiResponse({ status: 200, description: 'User updated', type: User })
   @ApiResponse({ status: 201, description: 'User created', type: User })
-  update(@Param('id') id: number, @Body() user: UserDto): Promise<User> {
-    return this.usersService.update(id, user);
+  update(@Param('email') email: string, @Body() user: UserDto): Promise<User> {
+    return this.usersService.update(email, user);
   }
 
-  @Get('books/:id')
+  @Get('books/:email')
   @ApiOperation({ summary: 'List user\'s books' })
   @ApiResponse({ status: 200, description: 'User found', type: [Book] })
   @ApiResponse({ status: 404, description: 'User not found' })
-  getBooks(@Param('id') id: number) {
-    return this.usersService.getBooks(id);
+  getBooks(@Param('email') email: string) {
+    return this.usersService.getBooks(email);
   }
 }

@@ -22,16 +22,16 @@ export class UsersService {
     return this.usersRepository.find();
   }
 
-  findOne(id: number): Promise<User> {
-    return this.usersRepository.findOneBy({id});
+  findOne(email: string): Promise<User> {
+    return this.usersRepository.findOneBy({email});
   }
 
-  async remove(id: number): Promise<void> {
-    await this.usersRepository.delete(id);
+  async remove(email: string): Promise<void> {
+    await this.usersRepository.delete(email);
   }
 
-  async update(id: number, userDto: UserDto): Promise<User> {
-    const user = await this.usersRepository.findOneBy({id});
+  async update(email: string, userDto: UserDto): Promise<User> {
+    const user = await this.usersRepository.findOneBy({email});
     if (user) {
       user.name = userDto.name;
       user.email = userDto.email;
@@ -41,8 +41,8 @@ export class UsersService {
     return user;
   }
 
-  async getBooks(id: number): Promise<Book[]> {
-    const user = await this.usersRepository.findOne({where: {id: id}, relations: ['books']});
+  async getBooks(email: string): Promise<Book[]> {
+    const user = await this.usersRepository.findOne({where: {email}, relations: ['books']});
     if (user) {
       return user.books;
     }

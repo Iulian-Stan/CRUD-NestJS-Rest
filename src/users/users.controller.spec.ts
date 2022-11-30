@@ -15,6 +15,8 @@ const user2Dto: UserDto = {
   password: 'pass #2'
 };
 
+const email: string = 'email';
+
 describe('UsersController', () => {
   let usersController: UsersController;
   let usersService: UsersService;
@@ -60,22 +62,22 @@ describe('UsersController', () => {
 
   describe('findOne()', () => {
     it('should find a user', () => {
-      expect(usersController.findOne(1)).resolves.toEqual(user1Dto);
-      expect(usersService.findOne).toHaveBeenCalled();
+      expect(usersController.findOne(email)).resolves.toEqual(user1Dto);
+      expect(usersService.findOne).toHaveBeenCalledWith(email);
     });
   });
 
   describe('remove()', () => {
     it('should remove the user', () => {
-      usersController.remove(2);
-      expect(usersService.remove).toBeCalledWith(2);
+      usersController.remove(email);
+      expect(usersService.remove).toHaveBeenCalledWith(email);
     });
   });
 
   describe('update()', () => {
     it('should update a user', () => {
-      expect(usersController.update(1, user2Dto)).resolves.toEqual(user2Dto);
-      expect(usersService.update).toBeCalledWith(1, user2Dto);
+      expect(usersController.update(email, user2Dto)).resolves.toEqual(user2Dto);
+      expect(usersService.update).toHaveBeenCalledWith(email, user2Dto);
     });
   });
 });

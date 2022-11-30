@@ -5,19 +5,19 @@ import { User } from '../../users/model';
 @Entity()
 export class Book {
   @PrimaryGeneratedColumn()
-  @ApiProperty({ example: '1', description: 'Unique identifier', required: false })
+  @ApiProperty({ description: 'Unique identifier', example: '1', required: false })
   id: number;
 
   @Column({ length: 50 })
-  @ApiProperty({ example: 'Little Red Riding Hood', description: 'Book title' })
+  @ApiProperty({ description: 'Book title', example: 'Little Red Riding Hood' })
   title: string;
 
   @Column({ length: 50 })
-  @ApiProperty({ example: 'Charles Perrault', description: 'Book author' })
+  @ApiProperty({ description: 'Book author', example: 'Charles Perrault' })
   author: string;
 
   @Column({ length: 50 })
-  @ApiProperty({ example: 'Fairy Tale for kids', description: 'Book description' })
+  @ApiProperty({ description: 'Book description', example: 'Fairy Tale for kids' })
   description: string;
 
   // Associations
