@@ -4,6 +4,7 @@ export default () => ({
     path: process.env.SWAGGER_PATH || 'api',
   },
   jwt: {
-    secret: process.env.JWT_SECRET || 'secretKey'
+    secret: process.env.JWT_SECRET || 'secretKey',
+    expiresIn: process.env.JWT_EXPIRES || '300s',
   }
 });

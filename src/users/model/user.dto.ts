@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { UserRole } from './user.entity';
 
 export class UserDto {
   @ApiProperty({ description: 'User\'s name', example: 'John Doe' })
@@ -9,4 +10,7 @@ export class UserDto {
 
   @ApiProperty({ description: 'User\'s password' })
   readonly password: string;
+
+  @ApiProperty({ description: 'User\'s password', enum: UserRole })
+  readonly role: UserRole;
 }

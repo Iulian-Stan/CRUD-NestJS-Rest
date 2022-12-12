@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User, UserDto } from './model';
@@ -10,11 +10,15 @@ export class UsersService {
   constructor(@InjectRepository(User) private readonly usersRepository: Repository<User>) {}
 
   async create(userDto: UserDto): Promise<User> {
-    const user = new User();
+    let user = await this.usersRepository.findOneBy({ email: userDto.email });
+    if (user) {
+      throw new BadRequestException('User already exists');
+    }
+    user = new User();
     user.name = userDto.name;
     user.email = userDto.email;
-    user.password = await bcrypt.hash(userDto.password, 10);
-    user.books = [];
+    user.password = userDto.password;
+    user.role = userDto.role;
     return this.usersRepository.save(user);
   }
 
@@ -31,21 +35,27 @@ export class UsersService {
   }
 
   async update(email: string, userDto: UserDto): Promise<User> {
-    const user = await this.usersRepository.findOneBy({email});
-    if (user) {
+    const user = await this.usersRepository.findOneBy({ email });
+    if (!user) {
+      throw new BadRequestException('User not found');
+    }
+    if (userDto.name) {
       user.name = userDto.name;
-      user.email = userDto.email;
-      user.password = await bcrypt.hash(userDto.password, 10);
-      return this.usersRepository.save(user);
-    } 
-    return user;
+    }
+    if (userDto.password) {
+      user.password = userDto.password;
+    }
+    if (userDto.role) {
+      user.role = userDto.role;
+    }
+    return this.usersRepository.save(user);
   }
 
   async getBooks(email: string): Promise<Book[]> {
-    const user = await this.usersRepository.findOne({where: {email}, relations: ['books']});
-    if (user) {
-      return user.books;
+    const user = await this.usersRepository.findOne({ where: { email }, relations: ['books']});
+    if (!user) {
+      throw new BadRequestException('User not found');
     }
-    return null;
+    return user.books;
   }
 }

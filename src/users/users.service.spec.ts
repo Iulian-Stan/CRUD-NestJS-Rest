@@ -1,26 +1,29 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User, UserDto } from './model';
+import { User, UserDto, UserRole } from './model';
 import { UsersService } from './users.service';
 
 const usersArray: UserDto[] = [
   {
     name: 'name #1',
     email: 'email #1',
-    password: 'pass #1'
+    password: 'pass #1',
+    role: UserRole.USER
   },
   {
     name: 'name #2',
-    email: 'email #2',
-    password: 'pass #2'
+    email: 'email #1',
+    password: 'pass #2',
+    role: UserRole.ADMIN
   }
 ];
 
 const oneUser: UserDto = {
   name: 'name #1',
   email: 'email #1',
-  password: 'pass #1'
+  password: 'pass #1',
+  role: UserRole.USER
 };
 
 const email = 'email';

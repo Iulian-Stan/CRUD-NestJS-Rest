@@ -1,18 +1,20 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UserDto } from './model';
+import { UserDto, UserRole } from './model';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 
 const user1Dto: UserDto = {
   name: 'name #1',
   email: 'email #1',
-  password: 'pass #1'
+  password: 'pass #1',
+  role: UserRole.USER
 };
 
 const user2Dto: UserDto = {
   name: 'name #2',
-  email: 'email #2',
-  password: 'pass #2'
+  email: 'email #1',
+  password: 'pass #2',
+  role: UserRole.ADMIN
 };
 
 const email = 'email';

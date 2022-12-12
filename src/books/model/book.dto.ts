@@ -10,6 +10,6 @@ export class BookDto {
   @ApiProperty({ description: 'Book description', example: 'Fairy Tale for kids' })
   readonly description: string;
 
-  @ApiProperty({ description: 'Owner identifier' })
-  readonly ownerId: string;
+  @ApiProperty({ description: 'Owner\'s email', example: 'john.doe@mail.com' })
+  readonly owner: string;
 }
